@@ -36,7 +36,10 @@
             {% for like in g.user.likes %} 
 
                   {% if message.id == like.id %}
-                    <span><img src="/static/favicon.ico" alt="Liked"></span> 
+                  <form action="/users/remove_like/{{message.id}}" method="post">
+                    <button><img src="/static/favicon.ico" alt="Liked"></button>
+                  </form>
+                    <!-- <span><img src="/static/favicon.ico" alt="Liked"></span>  -->
                   {% endif %}
             {% endfor %}
           </div>

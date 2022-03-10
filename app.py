@@ -294,6 +294,16 @@ def messages_like(message_id):
     db.session.commit()
     return redirect(f'/messages/{message_id}')
 
+@app.route('/users/remove_like/<int:message_id>', methods=["GET", "POST"])
+def messages_unlike(message_id):
+    """Unlike a message."""
+    msg = Message.query.get(message_id)
+    g.user.likes.remove(msg)
+    # db.session.delete(msg)
+    db.session.commit()
+    return redirect('/')
+
+
 @app.route('/messages/<int:message_id>/delete', methods=["POST"])
 def messages_destroy(message_id):
     """Delete a message."""
