@@ -11,8 +11,6 @@ CURR_USER_KEY = "curr_user"
 
 app = Flask(__name__)
 
-# Get DB_URI from environ variable (useful for production/testing) or,
-# if not set there, use development local db.
 app.config['SQLALCHEMY_DATABASE_URI'] = (
     os.environ.get('DATABASE_URL', 'postgresql:///warbler'))
 
@@ -115,7 +113,6 @@ def login():
 def logout():
     """Handle logout of user."""
 
-    # IMPLEMENT THIS
     if CURR_USER_KEY in session:
         del session[CURR_USER_KEY]
         flash("Successfully logged out!")
@@ -148,7 +145,6 @@ def users_show(user_id):
     user = User.query.get_or_404(user_id)
 
     # snagging messages in order from the database;
-    # user.messages won't be in order by default
     messages = (Message
                 .query
                 .filter(Message.user_id == user_id)
@@ -216,7 +212,6 @@ def stop_following(follow_id):
 def profile():
     """Update profile for current user."""
 
-    # IMPLEMENT THIS
     form = UserEditForm()
 
     if form.validate_on_submit():
